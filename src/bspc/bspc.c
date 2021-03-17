@@ -407,18 +407,19 @@ void AASOuputFile( quakefile_t *qf, char *outputpath, char *filename ) {
 	} //end if
 	else
 	{
+		char *period;
+
 		strcpy( filename, qf->filename );
-		while ( strlen( filename ) &&
-				filename[strlen( filename ) - 1] != '.' )
-		{
-			filename[strlen( filename ) - 1] = '\0';
-		} //end while
+		period = strrchr( filename, '.' );
+		if ( period ) {
+			*period = '\0';
+		}
 
 		// Ridah, add extension
 		strcat( filename, aas_extension );
 		// done.
 
-		strcat( filename, "aas" );
+		strcat( filename, ".aas" );
 	} //end else
 } //end of the function AASOutputFile
 //===========================================================================
