@@ -364,7 +364,7 @@ void Map2Bsp(char *mapfilename, char *outputfilename)
 //===========================================================================
 void AASOuputFile( quakefile_t *qf, char *outputpath, char *filename ) {
 	char ext[MAX_PATH];
-
+	char *period;
 	//
 	if ( strlen( outputpath ) ) {
 		strcpy( filename, outputpath );
@@ -408,17 +408,18 @@ void AASOuputFile( quakefile_t *qf, char *outputpath, char *filename ) {
 	else
 	{
 		strcpy( filename, qf->filename );
-		while ( strlen( filename ) &&
-				filename[strlen( filename ) - 1] != '.' )
+		while(strlen(filename) &&
+				filename[strlen(filename)-1] != '.')
 		{
-			filename[strlen( filename ) - 1] = '\0';
+			filename[strlen(filename)-1] = '\0';
 		} //end while
-
+		period = strrchr( filename, '.' );
+		if (period) *period = '\0';
 		// Ridah, add extension
 		strcat( filename, aas_extension );
 		// done.
 
-		strcat( filename, "aas" );
+		strcat( filename, ".aas" );
 	} //end else
 } //end of the function AASOutputFile
 //===========================================================================
